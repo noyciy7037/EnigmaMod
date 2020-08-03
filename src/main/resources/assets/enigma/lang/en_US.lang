@@ -1,0 +1,7 @@
+#Enigma Language File(English)
+
+#Config
+config.enigma.category.mode=Enigma Mode
+config.enigma.category.mode.tooltip=Enigma Mod Mode settings.
+config.enigma.prop.enabledNeutralMode=Neutral Mode
+config.enigma.prop.enabledNeutralMode.tooltip=Neutral Mode setting.

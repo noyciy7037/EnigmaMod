@@ -1,0 +1,45 @@
+sourceSets.main {
+    java.srcDirs project.projectDir.name
+    resources.srcDirs project.projectDir.name
+}
+version = "$VERSION"
+File mcmodinfoFile = file('src/main/resources/mcmod.info')
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.anatawa12:compile-time-constant:1.0.1'
+    }
+    tasks.withType(JavaCompile) {
+        options.encoding = "UTF-8"
+    }
+}
+
+apply plugin: 'com.anatawa12.compile-time-constant'
+
+tasks.withType(Jar) { compileJava.options.encoding = 'UTF-8' }
+dependencies {
+    compile fileTree(dir: 'lib', include: '*.jar')
+}
+
+runClient {
+    args '--username', 'yuito_3110'
+    jvmArgs = ['-Dfml.coreMods.load=com.github.yuitosaito.enigma.asm.EGCorePlugin']
+}
+
+createCompileTimeConstant {
+    constantsClass = "com.github.yuitosaito.enigma.Constants"
+    values version: version.toString()
+}
+
+//manifestファイルの書き込みをビルドに追加する。これにより、coremodの読み込みが可能になる。
+//なお、テスト起動時にはこのオプションが効かないためVMオプションに以下の引数を追加する。
+//-Dfml.coreMods.load=alcore.asm.ALCorePlugin
+jar {
+    manifest {
+        attributes FMLCorePlugin: 'com.github.yuitosaito.enigma.asm.EGCorePlugin'
+        attributes FMLCorePluginContainsFMLMod: 'true'
+    }
+}

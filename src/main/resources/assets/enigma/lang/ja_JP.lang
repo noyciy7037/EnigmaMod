@@ -1,0 +1,7 @@
+#Enigma 言語ファイル(日本語)
+
+#コンフィグ
+config.enigma.category.mode=Enigmaモード
+config.enigma.category.mode.tooltip=Enigma Modのモード設定。
+config.enigma.prop.enabledNeutralMode=中立モード
+config.enigma.prop.enabledNeutralMode.tooltip=中立モードの設定。
