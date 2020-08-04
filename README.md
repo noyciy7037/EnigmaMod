@@ -23,3 +23,6 @@ Enigma終了:
 ### enabledNeutralMode
 初期値: `false`  
 `true`に設定すると`/enigma enable`でも聞き専用モードで起動します。(中立モード)
+
+## ライセンス
+[CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/deed.ja "CC0 1.0 Universal")
