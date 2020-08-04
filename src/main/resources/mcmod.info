@@ -4,7 +4,7 @@
     "modid": "enigma",
     "name": "Enigma MOD",
     "description": "Encrypt the chat.",
-    "version": "1.2.0",
+    "version": "1.2.1",
     "mcversion": "1.7.10",
     "updateUrl": "",
     "authorList": ["yuito_3110"],

@@ -31,6 +31,8 @@ public class EnigmaModEventHandler {
         String ft = e.message.getUnformattedText();
         String message = ft.substring(unformattedText.length());
         if (message.equals("")) return;
+        if(message.charAt(0) != '=')return;
+        message = message.substring(1);
         String username = unformattedText.substring(1, unformattedText.length() - 2).replaceAll('\u00a7' + ".", "");
         if (EnigmaMOD.minecraft.thePlayer.getDisplayName().replaceAll('\u00a7' + ".", "").equals(username))
             return;
@@ -66,9 +68,9 @@ public class EnigmaModEventHandler {
                 }
                 String dec = Crypt.decryptToken(builder.toString(), iv, sk);
                 if (dec == null) return;
-                //ChatComponentText cct = new ChatComponentText(builder);
-                //cct.getChatStyle().setColor(EnumChatFormatting.GRAY);
-                //minecraft.thePlayer.addChatMessage(cct);
+                ChatComponentText rawChatText = new ChatComponentText(e.message.getUnformattedText());
+                rawChatText.getChatStyle().setColor(EnumChatFormatting.GRAY);
+                EnigmaMOD.minecraft.thePlayer.addChatMessage(rawChatText);
                 e.message = new ChatComponentText(unformattedText + dec);
                 EnigmaMOD.messages.clear();
                 return;
@@ -92,7 +94,7 @@ public class EnigmaModEventHandler {
                     EnigmaMOD.messages.add(1, id);
                     EnigmaMOD.messages.add(2, rme);
                 }
-                e.setCanceled(true);
+                e.message.getChatStyle().setColor(EnumChatFormatting.GRAY);
                 return;
             }
         }
@@ -107,8 +109,8 @@ public class EnigmaModEventHandler {
     @SubscribeEvent
     public void ClientChatSendEvent(ClientChatSendEvent e) {
         if (EnigmaMOD.mode == 0 || e.message.indexOf("/") == 0) return;
-        if(EnigmaMOD.mode == 2)return;
-        if(EnigmaModConfigCore.isNeutral)return;
+        if (EnigmaMOD.mode == 2) return;
+        if (EnigmaModConfigCore.isNeutral) return;
         Calendar cl = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
         Random random = new Random(Integer.parseInt(sdf.format(cl.getTime()).replace("/", "")));
@@ -131,20 +133,20 @@ public class EnigmaModEventHandler {
             for (int i = 0; i < message.length() / 60 + 1; ++i) {
                 if ((i + 1) >= message.length() / 60 + 1) {
                     if (message.length() >= (i + 1) * 60)
-                        EnigmaMOD.minecraft.thePlayer.sendQueue.addToSendQueue(new C01PacketChatMessage(message.substring(i * 60, (i + 1) * 60) + String.format("%04d", ri) + "=END="));
+                        EnigmaMOD.minecraft.thePlayer.sendQueue.addToSendQueue(new C01PacketChatMessage("=" + message.substring(i * 60, (i + 1) * 60) + String.format("%04d", ri) + "=END="));
                     else
-                        EnigmaMOD.minecraft.thePlayer.sendQueue.addToSendQueue(new C01PacketChatMessage(message.substring(i * 60) + String.format("%04d", ri) + "=END="));
+                        EnigmaMOD.minecraft.thePlayer.sendQueue.addToSendQueue(new C01PacketChatMessage("=" + message.substring(i * 60) + String.format("%04d", ri) + "=END="));
                 } else {
                     if (message.length() >= (i + 1) * 60)
-                        EnigmaMOD.minecraft.thePlayer.sendQueue.addToSendQueue(new C01PacketChatMessage(message.substring(i * 60, (i + 1) * 60) + String.format("%04d", ri) + "="));
+                        EnigmaMOD.minecraft.thePlayer.sendQueue.addToSendQueue(new C01PacketChatMessage("=" + message.substring(i * 60, (i + 1) * 60) + String.format("%04d", ri) + "="));
                     else
-                        EnigmaMOD.minecraft.thePlayer.sendQueue.addToSendQueue(new C01PacketChatMessage(message.substring(i * 60) + String.format("%04d", ri) + "="));
+                        EnigmaMOD.minecraft.thePlayer.sendQueue.addToSendQueue(new C01PacketChatMessage("=" + message.substring(i * 60) + String.format("%04d", ri) + "="));
                 }
             }
             e.setCanceled(true);
         } else {
             EnigmaMOD.minecraft.thePlayer.addChatMessage(mes);
-            e.message = message;
+            e.message = "=" + message;
 
         }
     }
