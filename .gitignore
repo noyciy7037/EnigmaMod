@@ -223,8 +223,13 @@ $RECYCLE.BIN/
 
 ### Gradle ###
 .gradle
-/build/
-!/build/libs/*
+/build/classes/
+/build/compile-time-constant/
+/build/dependency-cache/
+/build/resources/
+/build/sources/
+/build/tmp/
+
 
 # Ignore Gradle GUI config
 gradle-app.setting
