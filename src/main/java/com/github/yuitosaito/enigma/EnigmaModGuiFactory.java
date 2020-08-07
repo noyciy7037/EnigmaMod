@@ -2,10 +2,14 @@ package com.github.yuitosaito.enigma;
 
 import cpw.mods.fml.client.IModGuiFactory;
 import cpw.mods.fml.client.config.GuiConfig;
+import cpw.mods.fml.client.config.IConfigElement;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraftforge.common.config.ConfigElement;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 
@@ -35,7 +39,7 @@ public class EnigmaModGuiFactory implements IModGuiFactory {
 
     public static class EnigmaModConfigGui extends GuiConfig {
         public EnigmaModConfigGui(GuiScreen parent) {
-            super(parent, (new ConfigElement<>(EnigmaModConfigCore.cfg.getCategory(EnigmaModConfigCore.MODE))).getChildElements(), EnigmaMOD.MOD_ID, false, false, EnigmaMOD.MOD_NAME);
+            super(parent, EnigmaModConfigCore.getElements(), EnigmaMOD.MOD_ID, false, false, EnigmaMOD.MOD_NAME);
         }
     }
 }

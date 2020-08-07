@@ -1,5 +1,6 @@
 package com.github.yuitosaito.enigma;
 
+import com.github.yuitosaito.enigma.gui.EnigmaModGuiIngame;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -23,6 +24,7 @@ public class EnigmaMOD {
 
     public static String key = null;
     public static int mode = 0;
+    public static EnigmaModGuiIngame enigmaModGuiIngame;
 
     public static List<String> messages = new ArrayList<>();
 
@@ -39,6 +41,8 @@ public class EnigmaMOD {
         minecraft = Minecraft.getMinecraft();
         ClientCommandHandler.instance.registerCommand(new CommandEnigma());
         PacketHandler.init();
+
+        enigmaModGuiIngame = new EnigmaModGuiIngame(minecraft);
 
         EnigmaModConfigCore.loadConfig(e);
     }

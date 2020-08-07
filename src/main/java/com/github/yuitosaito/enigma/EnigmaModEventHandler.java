@@ -9,6 +9,7 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.client.event.ClientChatReceivedEvent;
+import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 
 import javax.crypto.BadPaddingException;
@@ -31,7 +32,7 @@ public class EnigmaModEventHandler {
         String ft = e.message.getUnformattedText();
         String message = ft.substring(unformattedText.length());
         if (message.equals("")) return;
-        if(message.charAt(0) != '=')return;
+        if (message.charAt(0) != '=') return;
         message = message.substring(1);
         String username = unformattedText.substring(1, unformattedText.length() - 2).replaceAll('\u00a7' + ".", "");
         if (EnigmaMOD.minecraft.thePlayer.getDisplayName().replaceAll('\u00a7' + ".", "").equals(username))
@@ -169,5 +170,11 @@ public class EnigmaModEventHandler {
         // コンフィグが変更された時に呼ばれる。
         if (event.modID.equals(EnigmaMOD.MOD_ID))
             EnigmaModConfigCore.syncConfig();
+    }
+
+    @SubscribeEvent
+    public void RenderGameOverlayEvent(RenderGameOverlayEvent e) {
+        if(EnigmaModConfigCore.isDisplayGui)
+        EnigmaMOD.enigmaModGuiIngame.renderGameOverlay();
     }
 }

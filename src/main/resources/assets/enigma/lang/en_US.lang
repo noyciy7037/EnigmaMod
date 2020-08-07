@@ -3,5 +3,15 @@
 #Config
 config.enigma.category.mode=Enigma Mode
 config.enigma.category.mode.tooltip=Enigma Mod Mode settings.
+config.enigma.category.gui=Enigma Gui Config
+config.enigma.category.gui.tooltip=Enigma Mod Gui settings.
 config.enigma.prop.enabledNeutralMode=Neutral Mode
 config.enigma.prop.enabledNeutralMode.tooltip=Neutral Mode setting.
+config.enigma.prop.isDisplayGui=Display Gui
+config.enigma.prop.isDisplayGui.tooltip=Display Gui?
+config.enigma.prop.textPosition=Text Position
+config.enigma.prop.textPosition.tooltip=Text Position.
+config.enigma.prop.xGap=X Pos Gap
+config.enigma.prop.xGap.tooltip=How much X Pos Gap?
+config.enigma.prop.yGap=Y Pos Gap
+config.enigma.prop.yGap.tooltip=How much Y Pos Gap?

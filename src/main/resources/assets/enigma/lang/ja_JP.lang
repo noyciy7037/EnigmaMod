@@ -3,5 +3,15 @@
 #コンフィグ
 config.enigma.category.mode=Enigmaモード
 config.enigma.category.mode.tooltip=Enigma Modのモード設定。
+config.enigma.category.gui=Enigma Gui 設定
+config.enigma.category.gui.tooltip=Enigma ModのGui設定。
 config.enigma.prop.enabledNeutralMode=中立モード
 config.enigma.prop.enabledNeutralMode.tooltip=中立モードの設定。
+config.enigma.prop.isDisplayGui=Guiの表示
+config.enigma.prop.isDisplayGui.tooltip=Guiを表示しますか。
+config.enigma.prop.textPosition=テキストの位置
+config.enigma.prop.textPosition.tooltip=テキストの位置を設定します。
+config.enigma.prop.xGap=x座標のズレ
+config.enigma.prop.xGap.tooltip=x座標のズレを設定。
+config.enigma.prop.yGap=y座標のズレ
+config.enigma.prop.yGap.tooltip=y座標のズレを設定。
