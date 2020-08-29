@@ -10,7 +10,8 @@ public class MessageKey implements IMessage {
     public String name;
     public String key;
 
-    public MessageKey(){}
+    public MessageKey() {
+    }
 
     public MessageKey(byte type) {
         this.type = type;
@@ -18,9 +19,9 @@ public class MessageKey implements IMessage {
 
     public MessageKey(byte type, String keyorname) {
         this.type = type;
-        if(type == 0 || type == 1)
-        this.key = keyorname;
-        if(type == 2 || type == 3 || type == 5)
+        if (type == 0 || type == 1 || type == 6 || type == 7 || type == 8 || type == 9 || type == 10 || type == 11)
+            this.key = keyorname;
+        if (type == 2 || type == 3 || type == 5)
             this.name = keyorname;
     }
 
@@ -33,18 +34,18 @@ public class MessageKey implements IMessage {
     @Override//IMessageのメソッド。ByteBufからデータを読み取る。
     public void fromBytes(ByteBuf buf) {
         this.type = buf.readByte();
-        if (this.type == 0 || this.type == 1)
+        if (this.type == 0 || this.type == 1 || type == 6 || type == 7 || type == 8 || type == 9 || type == 10 || type == 11)
             this.key = ByteBufUtils.readUTF8String(buf);
-        if (this.type == 1 || this.type == 3 || this.type == 5)
+        if (this.type == 1 || this.type == 3 || this.type == 5 || type == 7 || type == 9 || type == 11)
             this.name = ByteBufUtils.readUTF8String(buf);
     }
 
     @Override//IMessageのメソッド。ByteBufにデータを書き込む。
     public void toBytes(ByteBuf buf) {
         buf.writeByte(this.type);
-        if (this.type == 0 || this.type == 1)
+        if (this.type == 0 || this.type == 1 || type == 6 || type == 7 || type == 8 || type == 9 || type == 10 || type == 11)
             ByteBufUtils.writeUTF8String(buf, this.key);
-        if (this.type == 1 || this.type == 3 || this.type == 5)
+        if (this.type == 1 || this.type == 3 || this.type == 5 || type == 7 || type == 9 || type == 11)
             ByteBufUtils.writeUTF8String(buf, this.name);
     }
 }

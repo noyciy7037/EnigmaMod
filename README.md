@@ -4,11 +4,17 @@ Minecraftのチャットを暗号化することが出来ます。
 
 ## 使用法
 暗号方式はAES-128です。  
-暗号キーの設定:  
-`/enigma setkey KEYKEYKEYKEYKEYK`
+暗号キーの追加:  
+`/enigma addkey KEYKEYKEYKEYKEYK`
 
 暗号キーの確認:  
 `/enigma getkey`
+
+暗号キーの削除:  
+`/enigma removekey index(Integer)`
+
+メインの暗号キーの選択(暗号化用):  
+`/enigma setmain index(Integer)`
 
 Enigma起動:  
 `/enigma enable`

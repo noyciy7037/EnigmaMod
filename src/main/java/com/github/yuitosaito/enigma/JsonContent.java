@@ -3,33 +3,34 @@ package com.github.yuitosaito.enigma;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JsonContent {
-}
-
 class Single {
-    public String key;
+    public List<String> key;
+    public String version;
 
-    public Single(String key) {
+    public Single(List<String> key) {
         this.key = key;
+        this.version = EnigmaMOD.MOD_VERSION;
     }
 }
 
 class Multi {
     public List<AMulti> datas;
+    public String version;
 
     public Multi() {
-        this.datas = new ArrayList<AMulti>();
+        this.datas = new ArrayList<>();
+        this.version = EnigmaMOD.MOD_VERSION;
     }
 }
 
 class AMulti {
     public String name;
     public String ip;
-    public String key;
+    public List <String> key;
 
-    public AMulti(String name, String ip, String key) {
+    public AMulti(String name, String ip, List<String> keys) {
         this.name = name;
         this.ip = ip;
-        this.key = key;
+        this.key = keys;
     }
 }

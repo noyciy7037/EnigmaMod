@@ -15,14 +15,15 @@ import java.util.List;
 
 @Mod(modid = EnigmaMOD.MOD_ID, name = EnigmaMOD.MOD_NAME, version = EnigmaMOD.MOD_VERSION, guiFactory = "com.github.yuitosaito.enigma.EnigmaModGuiFactory")
 public class EnigmaMOD {
-
     public static Minecraft minecraft;
     public static final String MOD_ID = "enigma";
     public static final String MOD_NAME = "Enigma MOD";
     public static final String MOD_VERSION = Constants.version;
     public static final EventBus EVENT_BUS = new EventBus();
 
-    public static String key = null;
+    public static List<String> key = null;
+    public static String worldName;
+    public static String ipAddress;
     public static int mode = 0;
     public static EnigmaModGuiIngame enigmaModGuiIngame;
 
