@@ -6,6 +6,7 @@ import net.minecraft.util.ChatComponentTranslation;
 
 import java.util.List;
 
+@SuppressWarnings("SpellCheckingInspection")
 public class CommandEnigma extends CommandBase {
 
     @Override
@@ -76,49 +77,54 @@ public class CommandEnigma extends CommandBase {
             }
         }
         if (var2.length >= 2) {
-            if (var2[0].equals("addkey")) {
-                if (var2[1].length() != 16) {
-                    var1.addChatMessage(new ChatComponentTranslation("The length of the Enigma KEY is 16."));
-                    return;
-                }
-                if (EnigmaMOD.minecraft.func_147104_D() != null) {
-                    KeyController.saveKey(EnigmaMOD.minecraft.func_147104_D().serverIP,
-                            EnigmaMOD.minecraft.func_147104_D().serverName,
-                            var2[1]);
-                    var1.addChatMessage(new ChatComponentTranslation("Enigma KEY Set."));
-                } else {
-                    PacketHandler.INSTANCE.sendToServer(new MessageKey((byte) 0, var2[1]));
-                }
-            } else if (var2[0].equals("removekey")) {
-                if (!IntegerUtils.isInteger(var2[1])) {
-                    var1.addChatMessage(new ChatComponentTranslation("The Enigma index must be an integer."));
-                    return;
-                }
-                if (EnigmaMOD.minecraft.func_147104_D() != null) {
-                    KeyController.removeKey(EnigmaMOD.minecraft.func_147104_D().serverIP,
-                            EnigmaMOD.minecraft.func_147104_D().serverName,
-                            Integer.parseInt(var2[1]));
-                    var1.addChatMessage(new ChatComponentTranslation("Enigma KEY Removed."));
-                } else {
-                    PacketHandler.INSTANCE.sendToServer(new MessageKey((byte) 6, var2[1]));
-                }
-            } else if (var2[0].equals("setmain")) {
-                if (!IntegerUtils.isInteger(var2[1])) {
-                    var1.addChatMessage(new ChatComponentTranslation("The Enigma index must be an integer."));
-                    return;
-                }
-                if (EnigmaMOD.minecraft.func_147104_D() != null) {
-                    KeyController.setMainKey(EnigmaMOD.minecraft.func_147104_D().serverIP,
-                            EnigmaMOD.minecraft.func_147104_D().serverName,
-                            Integer.parseInt(var2[1]));
-                    var1.addChatMessage(new ChatComponentTranslation("Enigma Main KEY Set."));
-                } else {
-                    PacketHandler.INSTANCE.sendToServer(new MessageKey((byte) 8, var2[1]));
-                }
+            switch (var2[0]) {
+                case "addkey":
+                    if (var2[1].length() != 16) {
+                        var1.addChatMessage(new ChatComponentTranslation("The length of the Enigma KEY is 16."));
+                        return;
+                    }
+                    if (EnigmaMOD.minecraft.func_147104_D() != null) {
+                        KeyController.saveKey(EnigmaMOD.minecraft.func_147104_D().serverIP,
+                                EnigmaMOD.minecraft.func_147104_D().serverName,
+                                var2[1]);
+                        var1.addChatMessage(new ChatComponentTranslation("Enigma KEY Set."));
+                    } else {
+                        PacketHandler.INSTANCE.sendToServer(new MessageKey((byte) 0, var2[1]));
+                    }
+                    break;
+                case "removekey":
+                    if (!IntegerUtils.isInteger(var2[1])) {
+                        var1.addChatMessage(new ChatComponentTranslation("The Enigma index must be an integer."));
+                        return;
+                    }
+                    if (EnigmaMOD.minecraft.func_147104_D() != null) {
+                        KeyController.removeKey(EnigmaMOD.minecraft.func_147104_D().serverIP,
+                                EnigmaMOD.minecraft.func_147104_D().serverName,
+                                Integer.parseInt(var2[1]));
+                        var1.addChatMessage(new ChatComponentTranslation("Enigma KEY Removed."));
+                    } else {
+                        PacketHandler.INSTANCE.sendToServer(new MessageKey((byte) 6, var2[1]));
+                    }
+                    break;
+                case "setmain":
+                    if (!IntegerUtils.isInteger(var2[1])) {
+                        var1.addChatMessage(new ChatComponentTranslation("The Enigma index must be an integer."));
+                        return;
+                    }
+                    if (EnigmaMOD.minecraft.func_147104_D() != null) {
+                        KeyController.setMainKey(EnigmaMOD.minecraft.func_147104_D().serverIP,
+                                EnigmaMOD.minecraft.func_147104_D().serverName,
+                                Integer.parseInt(var2[1]));
+                        var1.addChatMessage(new ChatComponentTranslation("Enigma Main KEY Set."));
+                    } else {
+                        PacketHandler.INSTANCE.sendToServer(new MessageKey((byte) 8, var2[1]));
+                    }
+                    break;
             }
         }
     }
 
+    @SuppressWarnings("rawtypes")
     @Override
     public List addTabCompletionOptions(ICommandSender sender, String[] args) {
         if (args.length == 1) {

@@ -4,6 +4,7 @@ import com.github.yuitosaito.enigma.gui.EnigmaModGuiIngame;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
+import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.eventhandler.EventBus;
 import net.minecraft.client.Minecraft;
@@ -39,12 +40,15 @@ public class EnigmaMOD {
         FMLCommonHandler.instance().bus().register(eventHandler);
         EVENT_BUS.register(eventHandler);
 
-        minecraft = Minecraft.getMinecraft();
         ClientCommandHandler.instance.registerCommand(new CommandEnigma());
         PacketHandler.init();
 
-        enigmaModGuiIngame = new EnigmaModGuiIngame(minecraft);
-
         EnigmaModConfigCore.loadConfig(e);
+    }
+
+    @EventHandler
+    public void init(FMLInitializationEvent e){
+        minecraft = Minecraft.getMinecraft();
+        enigmaModGuiIngame = new EnigmaModGuiIngame(minecraft);
     }
 }

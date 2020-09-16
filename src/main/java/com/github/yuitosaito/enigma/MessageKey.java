@@ -10,6 +10,7 @@ public class MessageKey implements IMessage {
     public String name;
     public String key;
 
+    @SuppressWarnings({"unused", "RedundantSuppression"})
     public MessageKey() {
     }
 
@@ -17,12 +18,12 @@ public class MessageKey implements IMessage {
         this.type = type;
     }
 
-    public MessageKey(byte type, String keyorname) {
+    public MessageKey(byte type, String keyOrName) {
         this.type = type;
         if (type == 0 || type == 1 || type == 6 || type == 7 || type == 8 || type == 9 || type == 10 || type == 11)
-            this.key = keyorname;
+            this.key = keyOrName;
         if (type == 2 || type == 3 || type == 5)
-            this.name = keyorname;
+            this.name = keyOrName;
     }
 
     public MessageKey(byte type, String key, String name) {

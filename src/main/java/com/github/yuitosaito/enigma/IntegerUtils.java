@@ -6,6 +6,7 @@ public class IntegerUtils {
      * @param str 判定対象の文字列。
      * @return 文字列が10進数の整数であり、かつintの範疇に収まる場合はTrue.
      */
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     public static boolean isInteger(String str) {
         if (str == null
                 || str.isEmpty()

@@ -5,8 +5,9 @@ import com.github.yuitosaito.enigma.EnigmaModConfigCore;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.*;
-import org.lwjgl.opengl.GL11;
+import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.gui.Gui;
+import net.minecraft.client.gui.ScaledResolution;
 
 @SideOnly(Side.CLIENT)
 public class EnigmaModGuiIngame extends Gui {
@@ -21,11 +22,6 @@ public class EnigmaModGuiIngame extends Gui {
         int k = scaledresolution.getScaledWidth();
         int l = scaledresolution.getScaledHeight();
         FontRenderer fontrenderer = this.mc.fontRenderer;
-        this.mc.entityRenderer.setupOverlayRendering();
-        GL11.glEnable(GL11.GL_BLEND);
-
-        this.mc.mcProfiler.startSection("enigma");
-        GL11.glPushMatrix();
         String s = "Enigma: " + (EnigmaMOD.mode == 0 ? "Disable" : "") + (EnigmaMOD.mode == 1 ? "Enable" : "") + (EnigmaMOD.mode == 2 ? "Listen Mode" : "");
         int xGap = EnigmaModConfigCore.xGap;
         int yGap = EnigmaModConfigCore.yGap;
@@ -58,11 +54,5 @@ public class EnigmaModGuiIngame extends Gui {
                 fontrenderer.drawStringWithShadow(s, k - fontrenderer.getStringWidth(s) - 2 + xGap, l - fontrenderer.FONT_HEIGHT - 2 + yGap, 16777215);
                 break;
         }
-        GL11.glPopMatrix();
-        this.mc.mcProfiler.endSection();
-
-        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        GL11.glDisable(GL11.GL_LIGHTING);
-        GL11.glEnable(GL11.GL_ALPHA_TEST);
     }
 }

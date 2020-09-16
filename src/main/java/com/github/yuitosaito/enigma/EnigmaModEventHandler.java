@@ -14,12 +14,10 @@ import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Random;
@@ -124,7 +122,7 @@ public class EnigmaModEventHandler {
         String message = null;
         try {
             message = Crypt.encryptToken(e.message, iv, sk);
-        } catch (NoSuchPaddingException | InvalidAlgorithmParameterException | NoSuchAlgorithmException | InvalidKeyException | BadPaddingException | IllegalBlockSizeException noSuchPaddingException) {
+        } catch (InvalidAlgorithmParameterException | InvalidKeyException | BadPaddingException | IllegalBlockSizeException noSuchPaddingException) {
             noSuchPaddingException.printStackTrace();
         }
         if (message == null) return;
@@ -137,11 +135,13 @@ public class EnigmaModEventHandler {
             for (int i = 0; i < message.length() / 60 + 1; ++i) {
                 if ((i + 1) >= message.length() / 60 + 1) {
                     if (message.length() >= (i + 1) * 60)
+                        //noinspection DuplicateExpressions
                         EnigmaMOD.minecraft.thePlayer.sendQueue.addToSendQueue(new C01PacketChatMessage("=" + message.substring(i * 60, (i + 1) * 60) + String.format("%04d", ri) + "=END="));
                     else
                         EnigmaMOD.minecraft.thePlayer.sendQueue.addToSendQueue(new C01PacketChatMessage("=" + message.substring(i * 60) + String.format("%04d", ri) + "=END="));
                 } else {
                     if (message.length() >= (i + 1) * 60)
+                        //noinspection DuplicateExpressions
                         EnigmaMOD.minecraft.thePlayer.sendQueue.addToSendQueue(new C01PacketChatMessage("=" + message.substring(i * 60, (i + 1) * 60) + String.format("%04d", ri) + "="));
                     else
                         EnigmaMOD.minecraft.thePlayer.sendQueue.addToSendQueue(new C01PacketChatMessage("=" + message.substring(i * 60) + String.format("%04d", ri) + "="));
@@ -196,7 +196,9 @@ public class EnigmaModEventHandler {
     }
 
     @SubscribeEvent
-    public void RenderGameOverlayEvent(RenderGameOverlayEvent e) {
+    public void onRenderGui(RenderGameOverlayEvent.Post event)
+    {
+        if (event.type != RenderGameOverlayEvent.ElementType.EXPERIENCE) return;
         if (EnigmaModConfigCore.isDisplayGui)
             EnigmaMOD.enigmaModGuiIngame.renderGameOverlay();
     }
