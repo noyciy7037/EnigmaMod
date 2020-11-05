@@ -3,6 +3,7 @@ package com.github.yuitosaito.enigma;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.util.ChatComponentTranslation;
+import net.minecraft.util.StatCollector;
 
 import java.util.List;
 
@@ -27,11 +28,11 @@ public class CommandEnigma extends CommandBase {
     public void processCommand(ICommandSender var1, String[] var2) {
         if (var2.length == 0) {
             if (EnigmaMOD.mode == 2 || EnigmaModConfigCore.isNeutral) {
-                var1.addChatMessage(new ChatComponentTranslation("Enigma Listen Mode Enabled."));
+                var1.addChatMessage(new ChatComponentTranslation(StatCollector.translateToLocal("chat.log.enigma.mode.listenenabled")));
             } else if (EnigmaMOD.mode == 1) {
-                var1.addChatMessage(new ChatComponentTranslation("Enigma Enabled."));
+                var1.addChatMessage(new ChatComponentTranslation(StatCollector.translateToLocal("chat.log.enigma.mode.enabled")));
             } else {
-                var1.addChatMessage(new ChatComponentTranslation("Enigma Disabled."));
+                var1.addChatMessage(new ChatComponentTranslation(StatCollector.translateToLocal("chat.log.enigma.mode.disabled")));
             }
         }
         if (var2.length >= 1) {
@@ -41,9 +42,12 @@ public class CommandEnigma extends CommandBase {
                         List<String> key = KeyController.getKey(EnigmaMOD.minecraft.func_147104_D().serverIP, EnigmaMOD.minecraft.func_147104_D().serverName);
                         if (key != null && key.size() > 0) {
                             for (int i = 0; i < key.size(); ++i)
-                                var1.addChatMessage(new ChatComponentTranslation("Enigma KEY " + i + " :" + key.get(i) + (i == 0 ? " - MAIN" : "")));
+                                var1.addChatMessage(new ChatComponentTranslation(
+                                        StatCollector.translateToLocal("chat.log.enigma.key.get")
+                                                .replace("%1", "" + i).replace("%2", key.get(i)) +
+                                                (i == 0 ? StatCollector.translateToLocal("chat.log.enigma.key.get.main") : "")));
                         } else {
-                            var1.addChatMessage(new ChatComponentTranslation("Enigma KEY Not Set."));
+                            var1.addChatMessage(new ChatComponentTranslation(StatCollector.translateToLocal("chat.log.enigma.key.get.not")));
                         }
                     } else {
                         PacketHandler.INSTANCE.sendToServer(new MessageKey((byte) 2));
@@ -53,26 +57,26 @@ public class CommandEnigma extends CommandBase {
                     if (EnigmaMOD.key != null) {
                         if (!EnigmaModConfigCore.isNeutral) {
                             EnigmaMOD.mode = 1;
-                            var1.addChatMessage(new ChatComponentTranslation("Enigma Enabled."));
+                            var1.addChatMessage(new ChatComponentTranslation(StatCollector.translateToLocal("chat.log.enigma.mode.enabled")));
                         } else {
                             EnigmaMOD.mode = 2;
-                            var1.addChatMessage(new ChatComponentTranslation("Enigma Listen Mode Enabled."));
+                            var1.addChatMessage(new ChatComponentTranslation(StatCollector.translateToLocal("chat.log.enigma.mode.listenenabled")));
                         }
                     } else {
-                        var1.addChatMessage(new ChatComponentTranslation("Enigma KEY Not Set."));
+                        var1.addChatMessage(new ChatComponentTranslation(StatCollector.translateToLocal("chat.log.enigma.key.get.not")));
                     }
                     break;
                 case "enablelisten":
                     if (EnigmaMOD.key != null) {
                         EnigmaMOD.mode = 2;
-                        var1.addChatMessage(new ChatComponentTranslation("Enigma Listen Mode Enabled."));
+                        var1.addChatMessage(new ChatComponentTranslation(StatCollector.translateToLocal("chat.log.enigma.mode.listenenabled")));
                     } else {
-                        var1.addChatMessage(new ChatComponentTranslation("Enigma KEY Not Set."));
+                        var1.addChatMessage(new ChatComponentTranslation(StatCollector.translateToLocal("chat.log.enigma.key.get.not")));
                     }
                     break;
                 case "disable":
                     EnigmaMOD.mode = 0;
-                    var1.addChatMessage(new ChatComponentTranslation("Enigma Disabled."));
+                    var1.addChatMessage(new ChatComponentTranslation(StatCollector.translateToLocal("chat.log.enigma.mode.disabled")));
                     break;
             }
         }
@@ -80,42 +84,42 @@ public class CommandEnigma extends CommandBase {
             switch (var2[0]) {
                 case "addkey":
                     if (var2[1].length() != 16) {
-                        var1.addChatMessage(new ChatComponentTranslation("The length of the Enigma KEY is 16."));
+                        var1.addChatMessage(new ChatComponentTranslation(StatCollector.translateToLocal("chat.log.enigma.key.add.len")));
                         return;
                     }
                     if (EnigmaMOD.minecraft.func_147104_D() != null) {
                         KeyController.saveKey(EnigmaMOD.minecraft.func_147104_D().serverIP,
                                 EnigmaMOD.minecraft.func_147104_D().serverName,
                                 var2[1]);
-                        var1.addChatMessage(new ChatComponentTranslation("Enigma KEY Set."));
+                        var1.addChatMessage(new ChatComponentTranslation(StatCollector.translateToLocal("chat.log.enigma.key.add.added")));
                     } else {
                         PacketHandler.INSTANCE.sendToServer(new MessageKey((byte) 0, var2[1]));
                     }
                     break;
                 case "removekey":
                     if (!IntegerUtils.isInteger(var2[1])) {
-                        var1.addChatMessage(new ChatComponentTranslation("The Enigma index must be an integer."));
+                        var1.addChatMessage(new ChatComponentTranslation(StatCollector.translateToLocal("chat.log.enigma.key.index")));
                         return;
                     }
                     if (EnigmaMOD.minecraft.func_147104_D() != null) {
                         KeyController.removeKey(EnigmaMOD.minecraft.func_147104_D().serverIP,
                                 EnigmaMOD.minecraft.func_147104_D().serverName,
                                 Integer.parseInt(var2[1]));
-                        var1.addChatMessage(new ChatComponentTranslation("Enigma KEY Removed."));
+                        var1.addChatMessage(new ChatComponentTranslation(StatCollector.translateToLocal("chat.log.enigma.key.remove.removed")));
                     } else {
                         PacketHandler.INSTANCE.sendToServer(new MessageKey((byte) 6, var2[1]));
                     }
                     break;
                 case "setmain":
                     if (!IntegerUtils.isInteger(var2[1])) {
-                        var1.addChatMessage(new ChatComponentTranslation("The Enigma index must be an integer."));
+                        var1.addChatMessage(new ChatComponentTranslation(StatCollector.translateToLocal("chat.log.enigma.key.index")));
                         return;
                     }
                     if (EnigmaMOD.minecraft.func_147104_D() != null) {
                         KeyController.setMainKey(EnigmaMOD.minecraft.func_147104_D().serverIP,
                                 EnigmaMOD.minecraft.func_147104_D().serverName,
                                 Integer.parseInt(var2[1]));
-                        var1.addChatMessage(new ChatComponentTranslation("Enigma Main KEY Set."));
+                        var1.addChatMessage(new ChatComponentTranslation(StatCollector.translateToLocal("chat.log.enigma.key.setmain")));
                     } else {
                         PacketHandler.INSTANCE.sendToServer(new MessageKey((byte) 8, var2[1]));
                     }

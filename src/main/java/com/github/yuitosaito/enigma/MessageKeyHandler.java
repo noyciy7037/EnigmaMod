@@ -5,6 +5,7 @@ import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import cpw.mods.fml.relauncher.Side;
 import net.minecraft.util.ChatComponentTranslation;
+import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.DimensionManager;
 
 import java.util.List;
@@ -30,15 +31,18 @@ public class MessageKeyHandler implements IMessageHandler<MessageKey, IMessage> 
         } else {
             if (message.type == 1) {
                 KeyController.saveKey(message.name, message.key);
-                EnigmaMOD.minecraft.thePlayer.addChatMessage(new ChatComponentTranslation("Enigma KEY Set."));
+                EnigmaMOD.minecraft.thePlayer.addChatMessage(new ChatComponentTranslation(StatCollector.translateToLocal("chat.log.enigma.key.add.added")));
             }
             if (message.type == 3) {
                 List<String> key = KeyController.getKey(message.name);
                 if (key != null && key.size() > 0) {
                     for (int i = 0; i < key.size(); ++i)
-                        EnigmaMOD.minecraft.thePlayer.addChatMessage(new ChatComponentTranslation("Enigma KEY " + i + " :" + key.get(i) + (i == 0 ? " - MAIN" : "")));
+                        EnigmaMOD.minecraft.thePlayer.addChatMessage(new ChatComponentTranslation(
+                                StatCollector.translateToLocal("chat.log.enigma.key.get")
+                                        .replace("%1", "" + i).replace("%2", key.get(i)) +
+                                        (i == 0 ? StatCollector.translateToLocal("chat.log.enigma.key.get.main") : "")));
                 } else {
-                    EnigmaMOD.minecraft.thePlayer.addChatMessage(new ChatComponentTranslation("Enigma KEY Not Set."));
+                    EnigmaMOD.minecraft.thePlayer.addChatMessage(new ChatComponentTranslation(StatCollector.translateToLocal("chat.log.enigma.key.get.not")));
                 }
             }
             if (message.type == 5) {
@@ -46,11 +50,11 @@ public class MessageKeyHandler implements IMessageHandler<MessageKey, IMessage> 
             }
             if (message.type == 7) {
                 KeyController.removeKey(message.name, Integer.parseInt(message.key));
-                EnigmaMOD.minecraft.thePlayer.addChatMessage(new ChatComponentTranslation("Enigma KEY Removed."));
+                EnigmaMOD.minecraft.thePlayer.addChatMessage(new ChatComponentTranslation(StatCollector.translateToLocal("chat.log.enigma.key.remove.removed")));
             }
             if (message.type == 9) {
                 KeyController.setMainKey(message.name, Integer.parseInt(message.key));
-                EnigmaMOD.minecraft.thePlayer.addChatMessage(new ChatComponentTranslation("Enigma Main KEY Set."));
+                EnigmaMOD.minecraft.thePlayer.addChatMessage(new ChatComponentTranslation(StatCollector.translateToLocal("chat.log.enigma.key.setmain")));
             }
             if (message.type == 11) {
                 if (!message.name.equals(EnigmaMOD.worldName)) {

@@ -8,6 +8,7 @@ import net.minecraft.network.play.client.C01PacketChatMessage;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.StatCollector;
 import net.minecraftforge.client.event.ClientChatReceivedEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
@@ -196,8 +197,7 @@ public class EnigmaModEventHandler {
     }
 
     @SubscribeEvent
-    public void onRenderGui(RenderGameOverlayEvent.Post event)
-    {
+    public void onRenderGui(RenderGameOverlayEvent event) {
         if (event.type != RenderGameOverlayEvent.ElementType.EXPERIENCE) return;
         if (EnigmaModConfigCore.isDisplayGui)
             EnigmaMOD.enigmaModGuiIngame.renderGameOverlay();
@@ -208,7 +208,7 @@ public class EnigmaModEventHandler {
         EnigmaMOD.ipAddress = ip;
         if (EnigmaMOD.mode != 0) {
             EnigmaMOD.mode = 0;
-            EnigmaMOD.minecraft.thePlayer.addChatMessage(new ChatComponentTranslation("Enigma Disabled."));
+            EnigmaMOD.minecraft.thePlayer.addChatMessage(new ChatComponentTranslation(StatCollector.translateToLocal("chat.log.enigma.mode.enabled")));
         }
     }
 }

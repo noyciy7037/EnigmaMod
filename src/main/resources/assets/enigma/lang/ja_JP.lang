@@ -1,17 +1,39 @@
-#Enigma 言語ファイル(日本語)
+#Enigma Language File(English)
 
-#コンフィグ
-config.enigma.category.mode=Enigmaモード
-config.enigma.category.mode.tooltip=Enigma Modのモード設定。
-config.enigma.category.gui=Enigma Gui 設定
-config.enigma.category.gui.tooltip=Enigma ModのGui設定。
+#Config
+config.enigma.category.mode=エニグマモード
+config.enigma.category.mode.tooltip=モードの設定
+config.enigma.category.gui=GUI設定
+config.enigma.category.gui.tooltip=GUI設定
 config.enigma.prop.enabledNeutralMode=中立モード
-config.enigma.prop.enabledNeutralMode.tooltip=中立モードの設定。
-config.enigma.prop.isDisplayGui=Guiの表示
-config.enigma.prop.isDisplayGui.tooltip=Guiを表示しますか。
-config.enigma.prop.textPosition=テキストの位置
-config.enigma.prop.textPosition.tooltip=テキストの位置を設定します。
-config.enigma.prop.xGap=x座標のズレ
-config.enigma.prop.xGap.tooltip=x座標のズレを設定。
-config.enigma.prop.yGap=y座標のズレ
-config.enigma.prop.yGap.tooltip=y座標のズレを設定。
+config.enigma.prop.enabledNeutralMode.tooltip=中立モード設定
+config.enigma.prop.isDisplayGui=GUIの表示
+config.enigma.prop.isDisplayGui.tooltip=GUIを設定しますか？
+config.enigma.prop.textPosition=テキスト位置
+config.enigma.prop.textPosition.tooltip=テキスト位置の設定
+config.enigma.prop.xGap=縦のズレ
+config.enigma.prop.xGap.tooltip=縦のズレを設定
+config.enigma.prop.yGap=横のズレ
+config.enigma.prop.yGap.tooltip=横のズレを設定
+
+chat.log.enigma.mode.listenenabled=エニグマ聞き取りモード
+chat.log.enigma.mode.enabled=エニグマ有効
+chat.log.enigma.mode.disabled=エニグマ無効
+
+chat.log.enigma.key.get=エニグマキー %1 : %2
+chat.log.enigma.key.get.main= - メイン
+chat.log.enigma.key.get.not=エニグマキーが設定されていません
+
+chat.log.enigma.key.add.len=キーの長さは16文字である必要があります。
+chat.log.enigma.key.add.added=エニグマキーの追加
+
+chat.log.enigma.key.index=エニグマの番号は整数である必要があります。
+
+chat.log.enigma.key.remove.removed=キーを削除
+
+chat.log.enigma.key.setmain=メインのキーを設定
+
+gui.enigma.ingame.enigma=エニグマ: %1
+gui.enigma.ingame.enable=有効
+gui.enigma.ingame.enablelisten=聞き取り
+gui.enigma.ingame.disable=無効

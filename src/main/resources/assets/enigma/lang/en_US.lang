@@ -10,8 +10,30 @@ config.enigma.prop.enabledNeutralMode.tooltip=Neutral Mode setting.
 config.enigma.prop.isDisplayGui=Display Gui
 config.enigma.prop.isDisplayGui.tooltip=Display Gui?
 config.enigma.prop.textPosition=Text Position
-config.enigma.prop.textPosition.tooltip=Text Position.
+config.enigma.prop.textPosition.tooltip=Text Position setting.
 config.enigma.prop.xGap=X Pos Gap
 config.enigma.prop.xGap.tooltip=How much X Pos Gap?
 config.enigma.prop.yGap=Y Pos Gap
 config.enigma.prop.yGap.tooltip=How much Y Pos Gap?
+
+chat.log.enigma.mode.listenenabled=Enigma Listen Mode Enabled.
+chat.log.enigma.mode.enabled=Enigma Enabled.
+chat.log.enigma.mode.disabled=Enigma Disabled.
+
+chat.log.enigma.key.get=Enigma KEY %1 : %2
+chat.log.enigma.key.get.main= - MAIN
+chat.log.enigma.key.get.not=Enigma KEY Is Not Set.
+
+chat.log.enigma.key.add.len=The length of the Enigma KEY is 16.
+chat.log.enigma.key.add.added=Added Enigma KEY.
+
+chat.log.enigma.key.index=The Enigma index must be an integer.
+
+chat.log.enigma.key.remove.removed=Removed Enigma KEY.
+
+chat.log.enigma.key.setmain=Set The Main Enigma KEY.
+
+gui.enigma.ingame.enigma=Enigma: %1
+gui.enigma.ingame.enable=Enable
+gui.enigma.ingame.enablelisten=Listen Mode
+gui.enigma.ingame.disable=Disable
