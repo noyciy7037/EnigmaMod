@@ -197,7 +197,7 @@ public class EnigmaModEventHandler {
     }
 
     @SubscribeEvent
-    public void onRenderGui(RenderGameOverlayEvent event) {
+    public void onRenderGui(RenderGameOverlayEvent.Post event) {
         if (event.type != RenderGameOverlayEvent.ElementType.EXPERIENCE) return;
         if (EnigmaModConfigCore.isDisplayGui)
             EnigmaMOD.enigmaModGuiIngame.renderGameOverlay();
